@@ -9,7 +9,7 @@ import os
 from werkzeug.utils import secure_filename
 
 # Loading the model
-dt = joblib.load('forest_reg.joblib')
+dt = joblib.load('dt1.joblib')
 
 # Creating the Flask appp0'´ñ{-´ñp 5c}
 server = Flask(__name__)
