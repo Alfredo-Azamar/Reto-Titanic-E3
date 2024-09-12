@@ -21,16 +21,17 @@ def predictJSON():
     data = request.json
     print(data)
     inputData = np.array([
-        data['HomePlanet'],
-        data['CryoSleep'],
-        data['Destination'],
-        data['Age'],
-        data['VIP'],
         data['RoomService'],
         data['FoodCourt'],
         data['ShoppingMall'],
         data['Spa'],
-        data['VRDeck']
+        data['VRDeck'],
+        data['Age'],
+        data['VIP_True'],
+        data['CryoSleep_True'],
+        data['HomePlanet_Mars'],
+        data['Destination_PSO J318.5-22'],
+        data['Destination_TRAPPIST-1e']
     ])
 
     #Sosa's code
