@@ -33,11 +33,16 @@ def predictJSON():
         data['VRDeck']
     ])
 
+    #Sosa's code
     # Realizar la predicción
-    result = dt.predict([inputData.reshape(-1, 1)])
+    # result = dt.predict([inputData.reshape(-1, 1)])
 
     # Enviar la respuesta
-    return jsonify({'Prediction': str(result[0])})
+    # return jsonify({'Prediction': str(result[0])})
+
+    inputData = inputData.reshape(1, -1)
+    prediction = dt.predict(inputData)
+    return jsonify({'Prediction': str(prediction[0])})
 
 if __name__ == '__main__':
     # Iniciar la aplicación
