@@ -41,8 +41,8 @@ def predictJSON():
 
     # Enviar la respuesta
     # return jsonify({'Prediction': str(result[0])})
-    scaler = MinMaxScaler()
-    inputData = scaler.transform(inputData)
+    # scaler = MinMaxScaler()
+    # inputData = scaler.transform(inputData)
     prediction = dt.predict(inputData)
     return jsonify({'Prediction': str(prediction[0])})
 
