@@ -3,7 +3,7 @@
 from flask import Flask, request, jsonify
 import numpy as np
 import joblib
-from sklearn.preprocessing import MinMaxScaler
+
 
 # File management
 import os
@@ -41,8 +41,8 @@ def predictJSON():
 
     # Enviar la respuesta
     # return jsonify({'Prediction': str(result[0])})
-    # scaler = MinMaxScaler()
-    # inputData = scaler.transform(inputData)
+
+    inputData = inputData.reshape(1, -1)
     prediction = dt.predict(inputData)
     return jsonify({'Prediction': str(prediction[0])})
 
