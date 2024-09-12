@@ -30,8 +30,7 @@ def predictJSON():
         data['FoodCourt'],
         data['ShoppingMall'],
         data['Spa'],
-        data['VRDeck'],
-        data['Transported'],
+        data['VRDeck']
     ])
 
     # Realizar la predicción
