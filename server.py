@@ -21,7 +21,7 @@ def predictJSON():
     data = request.json
     print(data)
     inputData = np.array([
-        int(data['HomePlanet']),
+        data['HomePlanet'],
         data['CryoSleep'],
         data['Destination'],
         data['Age'],
