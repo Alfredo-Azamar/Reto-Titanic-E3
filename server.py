@@ -17,9 +17,6 @@ CORS(server)
 dt = joblib.load('dt1.joblib')
 scaler = joblib.load('scaler.joblib')
 
-# Creating the Flask
-server = Flask(__name__)
-
 # Defining a route to send JSON data
 @server.route('/predict', methods=['POST'])
 # @cross_origin(supports_credentials=True)
