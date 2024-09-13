@@ -11,7 +11,7 @@ import os
 from werkzeug.utils import secure_filename
 
 server = Flask(__name__)
-CORS(server, supports_credentials=True)
+CORS(server)
 
 # Loading the model
 dt = joblib.load('dt1.joblib')
@@ -54,4 +54,4 @@ def predictJSON():
 
 if __name__ == '__main__':
     # Iniciar la aplicación
-    server.run(debug=True, host='0.0.0.0', port=8080)
+    server.run(debug=False, host='0.0.0.0', port=8080)
