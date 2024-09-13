@@ -11,7 +11,7 @@ import os
 from werkzeug.utils import secure_filename
 
 server = Flask(__name__)
-CORS(server, resources={r"/*": {"origins": "*"}})
+CORS(server, supports_credentials=True)
 
 # Loading the model
 dt = joblib.load('dt1.joblib')
