@@ -76,6 +76,8 @@ def predictJSON():
     spa_gasto = float(gastos['Spa'])
     vr_deck_gasto = float(gastos['VRDeck'])
 
+    print(room_service_gasto, food_court_gasto, shopping_mall_gasto, spa_gasto, vr_deck_gasto)
+
     inputData = np.array([
         room_service_gasto,
         food_court_gasto,
