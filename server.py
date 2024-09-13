@@ -27,6 +27,7 @@ porcentajes = pd.read_csv('porcentaje_gastos_edad.csv')
 def calcular_gastos_por_edad_y_presupuesto(edad, presupuesto):
     # Buscar la fila correspondiente a la edad
     edad = float(edad)
+    presupuesto = float(presupuesto)
     fila_edad = porcentajes[porcentajes['Age'] == edad]
     
     # Verificar si la edad existe en el dataset
