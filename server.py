@@ -1,3 +1,5 @@
+### BACKEND SERVER ###
+
 ## Python Libraries
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -18,37 +20,36 @@ CORS(server)
 dt = joblib.load('Modelo/dt1_V5.joblib')
 scaler = joblib.load('Modelo/dt1_scaler_V5.joblib')
 
-# Extracting age relation with spending
-
+## Extracting age relation with spending
 # Cargar el dataset que contiene los porcentajes por edad
-porcentajes = pd.read_csv('porcentaje_gastos_edad.csv')
+porcentajes = pd.read_csv('Modelo/porcentaje_gastos_edad.csv')
 
 
 def calcular_gastos_por_edad_y_presupuesto(edad, presupuesto):
-    # Buscar la fila correspondiente a la edad
+    # Find the row corresponding to the age
     edad = float(edad)
     presupuesto = float(presupuesto)
     fila_edad = porcentajes[porcentajes['Age'] == edad]
     
-    # Verificar si la edad existe en el dataset
+     # Check if the age exists in the dataset
     if fila_edad.empty:
         return f"No se encontraron datos para la edad {edad}."
 
-    # Extraer los porcentajes para esa edad
+    # Extract the percentages for that age
     room_service_pct = fila_edad['RoomService%'].values[0]
     food_court_pct = fila_edad['FoodCourt%'].values[0]
     shopping_mall_pct = fila_edad['ShoppingMall%'].values[0]
     spa_pct = fila_edad['Spa%'].values[0]
     vr_deck_pct = fila_edad['VRDeck%'].values[0]
 
-    # Calcular el gasto en cada atributo según el presupuesto dado
+    # Calculate the spending on each attribute according to the given budget
     room_service_gasto = presupuesto * room_service_pct
     food_court_gasto = presupuesto * food_court_pct
     shopping_mall_gasto = presupuesto * shopping_mall_pct
     spa_gasto = presupuesto * spa_pct
     vr_deck_gasto = presupuesto * vr_deck_pct
 
-    # Formatear los resultados a dos decimales
+    # Format the results to two decimal places
     return [
         float(f"{room_service_gasto:.2f}"),
         float(f"{food_court_gasto:.2f}"),
@@ -61,21 +62,17 @@ def calcular_gastos_por_edad_y_presupuesto(edad, presupuesto):
 ## Defining a route to send JSON data
 @server.route('/predict', methods=['POST'])
 def predictJSON():
-    # Procesar los datos de entrada
+    # Process the input data
     data = request.json
     print(data)
 
     age = data['Age']
     budget = data['Budget']
 
-    # Calcular los gastos por servicio según la edad y el presupuesto
-    # print(age, budget)
+    # Calculate the spending by service according to age and budget
     gastos = calcular_gastos_por_edad_y_presupuesto(age, budget)
 
-    # Extraer los gastos calculados de cada servicio
-
-    print(gastos)
-
+    # Extract the calculated spending for each service
     room_service_gasto = (gastos[0])
     food_court_gasto = float(gastos[1])
     shopping_mall_gasto = float(gastos[2])
@@ -97,10 +94,6 @@ def predictJSON():
     ])
 
     print(inputData)
-    # OG
-    # inputData = inputData.reshape(1, -1)
-    # prediction = dt.predict(inputData)
-    # return jsonify({'Prediction': str(prediction[0])})
 
     inputData = inputData.reshape(1, -1)
     inputData_scaled = scaler.transform(inputData)
@@ -109,5 +102,5 @@ def predictJSON():
     return jsonify({'Prediction': str(prediction[0])})
 
 if __name__ == '__main__':
-    # Iniciar la aplicación
+    # Start the server
     server.run(debug=False, host='0.0.0.0', port=8080)
