@@ -67,6 +67,7 @@ def predictJSON():
     budget = data['Budget']
 
     # Calcular los gastos por servicio según la edad y el presupuesto
+    print(age, budget)
     gastos = calcular_gastos_por_edad_y_presupuesto(age, budget)
 
     # Extraer los gastos calculados de cada servicio
