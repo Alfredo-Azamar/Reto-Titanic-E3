@@ -92,6 +92,7 @@ def predictJSON():
         data['Destination_TRAPPIST-1e']
     ])
 
+    print(inputData)
     # OG
     # inputData = inputData.reshape(1, -1)
     # prediction = dt.predict(inputData)
