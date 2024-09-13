@@ -17,12 +17,12 @@ server = Flask(__name__)
 CORS(server)
 
 ## Loading the model
-dt = joblib.load('./Modelo/dt1_V5.joblib')
-scaler = joblib.load('./Modelo/dt1_scaler_V5.joblib')
+dt = joblib.load('\Modelo\dt1_V5.joblib')
+scaler = joblib.load('\Modelo\dt1_scaler_V5.joblib')
 
 ## Extracting age relation with spending
 # Cargar el dataset que contiene los porcentajes por edad
-porcentajes = pd.read_csv('./Modelo/porcentaje_gastos_edad.csv')
+porcentajes = pd.read_csv('\Modelo\porcentaje_gastos_edad.csv')
 
 
 def calcular_gastos_por_edad_y_presupuesto(edad, presupuesto):
