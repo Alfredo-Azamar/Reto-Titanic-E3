@@ -17,7 +17,7 @@ CORS(server)
 dt = joblib.load('dt1.joblib')
 scaler = joblib.load('scaler.joblib')
 
-# Creating the Flask appp0'´ñ{-´ñp 5c}
+# Creating the Flask
 server = Flask(__name__)
 
 # Defining a route to send JSON data
