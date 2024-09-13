@@ -1,0 +1,117 @@
+.quoter-page {
+  text-align: center;
+  font-family: "Century Gothic", "Futura";
+  height: 100vh;
+  flex-direction: row;
+}
+
+.quoter-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.arrow{
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 50px;
+  color: aliceblue;
+}
+
+.quoter-title{
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+  margin-top: 2%;
+  color: aliceblue;
+}
+
+.mini-logo{
+  margin: 0%;
+  margin-top: 5px;
+  width: 60px;
+}
+
+.arrow:hover{
+  cursor: pointer;
+}
+
+.form-section label {
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+  margin-top: 20px;
+  color: aliceblue;
+}
+
+.input-field {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid #AC4FC6;
+  background-color: transparent;
+  color: aliceblue;
+  margin-bottom: 20px;
+}
+
+.planet-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: aliceblue;
+}
+
+.origin-section{
+  margin-right: 20px;
+}
+
+.destination-section {
+  margin-left: 20px;
+}
+
+.planet-options {
+  display: flex;
+  justify-content: center;
+}
+
+.planet {
+  width: 60px;
+  height: 60px;
+  border-radius: 20%;
+  margin: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.planet.selected {
+  border: 3px solid aliceblue;;
+}
+
+.budget-section {
+  margin: 20px 0;
+  color: aliceblue;
+}
+
+.budget-slider {
+  width: 300px;
+  margin: 10px;
+}
+
+.vip-section {
+  margin-bottom: 20px;
+  color: aliceblue;
+}
+
+.quote-button {
+  padding: 10px 30px;
+  font-size: 18px;
+  background-color: #c7aefc;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  color: aliceblue;
+}
