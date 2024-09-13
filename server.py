@@ -47,13 +47,13 @@ def calcular_gastos_por_edad_y_presupuesto(edad, presupuesto):
     vr_deck_gasto = presupuesto * vr_deck_pct
 
     # Formatear los resultados a dos decimales
-    return {
-        'RoomService': f"{room_service_gasto:.2f}",
-        'FoodCourt': f"{food_court_gasto:.2f}",
-        'ShoppingMall': f"{shopping_mall_gasto:.2f}",
-        'Spa': f"{spa_gasto:.2f}",
-        'VRDeck': f"{vr_deck_gasto:.2f}"
-    }
+    return [
+        float(f"{room_service_gasto:.2f}"),
+        float(f"{food_court_gasto:.2f}"),
+        float(f"{shopping_mall_gasto:.2f}"),
+        float(f"{spa_gasto:.2f}"),
+        float(f"{vr_deck_gasto:.2f}")
+    ]
 
 
 ## Defining a route to send JSON data
@@ -70,18 +70,18 @@ def predictJSON():
     gastos = calcular_gastos_por_edad_y_presupuesto(age, budget)
 
     # Extraer los gastos calculados de cada servicio
-    # room_service_gasto = float(gastos['RoomService'])
-    # food_court_gasto = float(gastos['FoodCourt'])
-    # shopping_mall_gasto = float(gastos['ShoppingMall'])
-    # spa_gasto = float(gastos['Spa'])
-    # vr_deck_gasto = float(gastos['VRDeck'])
+    room_service_gasto = float(gastos[0])
+    food_court_gasto = float(gastos[1])
+    shopping_mall_gasto = float(gastos[2])
+    spa_gasto = float(gastos[3])
+    vr_deck_gasto = float(gastos[4])
 
     inputData = np.array([
-        # room_service_gasto,
-        # food_court_gasto,
-        # shopping_mall_gasto,
-        # spa_gasto,
-        # vr_deck_gasto,
+        room_service_gasto,
+        food_court_gasto,
+        shopping_mall_gasto,
+        spa_gasto,
+        vr_deck_gasto,
         data['Age'],
         data['VIP_True'],
         data['CryoSleep_True'],
