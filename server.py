@@ -26,6 +26,7 @@ porcentajes = pd.read_csv('porcentaje_gastos_edad.csv')
 
 def calcular_gastos_por_edad_y_presupuesto(edad, presupuesto):
     # Buscar la fila correspondiente a la edad
+    print(edad)
     fila_edad = porcentajes[porcentajes['Age'] == edad]
     
     # Verificar si la edad existe en el dataset
@@ -67,7 +68,7 @@ def predictJSON():
     budget = data['Budget']
 
     # Calcular los gastos por servicio según la edad y el presupuesto
-    print(age, budget)
+    # print(age, budget)
     gastos = calcular_gastos_por_edad_y_presupuesto(age, budget)
 
     # Extraer los gastos calculados de cada servicio
