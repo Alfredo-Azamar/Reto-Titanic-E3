@@ -22,6 +22,7 @@ server = Flask(__name__)
 
 # Defining a route to send JSON data
 @server.route('/predict', methods=['POST'])
+# @cross_origin(supports_credentials=True)
 def predictJSON():
     # Procesar los datos de entrada
     data = request.json
