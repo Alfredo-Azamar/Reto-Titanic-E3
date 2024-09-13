@@ -15,8 +15,8 @@ server = Flask(__name__)
 CORS(server)
 
 ## Loading the model
-dt = joblib.load('dt1_V6.joblib')
-scaler = joblib.load('dt1_scaler_V6.joblib')
+dt = joblib.load('Modelo/dt1_V5.joblib')
+scaler = joblib.load('Modelo/dt1_scaler_V5.joblib')
 
 # Extracting age relation with spending
 
