@@ -9,14 +9,12 @@ const LandingPage = (Props) => {
   const [showLogIn, setShowLogIn] = useState(false);
   const [gifLoaded, setGifLoaded] = useState(false);
 
-  // Setting timeout to show the login form.
   useEffect(() => {
     setTimeout(() => {
       setShowLogIn(true);
     }, 2000);
   }, []);
 
-  // Initial gif loading - opening for login.
   useEffect(() => {
     const img = new Image();
     img.onload = () => {
