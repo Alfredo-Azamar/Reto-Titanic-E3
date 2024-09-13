@@ -70,20 +70,18 @@ def predictJSON():
     gastos = calcular_gastos_por_edad_y_presupuesto(age, budget)
 
     # Extraer los gastos calculados de cada servicio
-    room_service_gasto = float(gastos['RoomService'])
-    food_court_gasto = float(gastos['FoodCourt'])
-    shopping_mall_gasto = float(gastos['ShoppingMall'])
-    spa_gasto = float(gastos['Spa'])
-    vr_deck_gasto = float(gastos['VRDeck'])
-
-    print(room_service_gasto, food_court_gasto, shopping_mall_gasto, spa_gasto, vr_deck_gasto)
+    # room_service_gasto = float(gastos['RoomService'])
+    # food_court_gasto = float(gastos['FoodCourt'])
+    # shopping_mall_gasto = float(gastos['ShoppingMall'])
+    # spa_gasto = float(gastos['Spa'])
+    # vr_deck_gasto = float(gastos['VRDeck'])
 
     inputData = np.array([
-        room_service_gasto,
-        food_court_gasto,
-        shopping_mall_gasto,
-        spa_gasto,
-        vr_deck_gasto,
+        # room_service_gasto,
+        # food_court_gasto,
+        # shopping_mall_gasto,
+        # spa_gasto,
+        # vr_deck_gasto,
         data['Age'],
         data['VIP_True'],
         data['CryoSleep_True'],
