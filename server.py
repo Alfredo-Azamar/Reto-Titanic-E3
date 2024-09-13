@@ -70,7 +70,10 @@ def predictJSON():
     gastos = calcular_gastos_por_edad_y_presupuesto(age, budget)
 
     # Extraer los gastos calculados de cada servicio
-    room_service_gasto = float(gastos[0])
+
+    print(gastos)
+
+    room_service_gasto = (gastos[0])
     food_court_gasto = float(gastos[1])
     shopping_mall_gasto = float(gastos[2])
     spa_gasto = float(gastos[3])
