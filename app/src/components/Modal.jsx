@@ -6,17 +6,13 @@ const Modal = ({ acceptance, onClose, destin }) => {
   const [planetD, setPlanetD] = useState(null);
 
   useEffect(() => {
-    const determinePlanet = () => {
-      if (destin === "0") {
+    if (destin === 0) {
         setPlanetD("TRAPPIST-1e");
-      } else if (destin === "1") {
+      } else if (destin === 1) {
         setPlanetD("55 Cancri e");
       } else {
         setPlanetD("PSO J318.5-22");
       }
-    };
-
-    determinePlanet();
   }, [destin]);
 
   return (

@@ -25,14 +25,14 @@ const Quoter = (props) => {
   const navigate = useNavigate();
 
   const [acceptance, setAcceptance] = useState(false);
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState(0);
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
   const [budget, setBudget] = useState(50);
   const [isVIP, setIsVIP] = useState(false);
   const [isCryoSleep, setIsCryoSleep] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [divBudget, setDivBudget] = useState(0);
+  
 
   const handleQuoteForAPI = async (event) => {
     try {
@@ -43,11 +43,7 @@ const Quoter = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          RoomService: isCryoSleep ? 0 : divBudget,
-          FoodCourt: isCryoSleep ? 0 : divBudget,
-          ShoppingMall: isCryoSleep ? 0 : divBudget,
-          Spa: isCryoSleep ? 0 : divBudget,
-          VRDeck: isCryoSleep ? 0 : divBudget,
+          Budget: isCryoSleep ? 0 : budget,
           Age: age,
           VIP_True: isVIP ? 1.0 : 0.0,
           CryoSleep_True: isCryoSleep ? 1.0 : 0.0,
@@ -58,11 +54,7 @@ const Quoter = (props) => {
       });
 
       const requestBody = {
-        RoomService: isCryoSleep ? 0 : divBudget,
-        FoodCourt: isCryoSleep ? 0 : divBudget,
-        ShoppingMall: isCryoSleep ? 0 : divBudget,
-        Spa: isCryoSleep ? 0 : divBudget,
-        VRDeck: isCryoSleep ? 0 : divBudget,
+        Budget: isCryoSleep ? 0 : budget,
         Age: age,
         VIP_True: isVIP ? 1.0 : 0.0,
         CryoSleep_True: isCryoSleep ? 1.0 : 0.0,
@@ -190,7 +182,7 @@ const Quoter = (props) => {
           max="6000"
           value={isCryoSleep ? 0 : budget}
           onChange={(e) =>
-            setBudget(e.target.value) & setDivBudget(e.target.value / 5)
+            setBudget(e.target.value)
           }
           className="budget-slider"
           disabled={isCryoSleep}
