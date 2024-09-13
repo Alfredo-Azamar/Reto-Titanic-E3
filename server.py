@@ -3,7 +3,7 @@
 from flask import Flask, request, jsonify
 import numpy as np
 import joblib
-
+from sklearn.preprocessing import MinMaxScaler
 
 # File management
 import os
@@ -11,6 +11,7 @@ from werkzeug.utils import secure_filename
 
 # Loading the model
 dt = joblib.load('dt1.joblib')
+scaler = joblib.load('scaler.joblib')
 
 # Creating the Flask appp0'´ñ{-´ñp 5c}
 server = Flask(__name__)
@@ -35,15 +36,15 @@ def predictJSON():
         data['Destination_TRAPPIST-1e']
     ])
 
-    #Sosa's code
-    # Realizar la predicción
-    # result = dt.predict([inputData.reshape(-1, 1)])
-
-    # Enviar la respuesta
-    # return jsonify({'Prediction': str(result[0])})
+    # OG
+    # inputData = inputData.reshape(1, -1)
+    # prediction = dt.predict(inputData)
+    # return jsonify({'Prediction': str(prediction[0])})
 
     inputData = inputData.reshape(1, -1)
-    prediction = dt.predict(inputData)
+    inputData_scaled = scaler.transform(inputData)
+
+    prediction = dt.predict(inputData_scaled)
     return jsonify({'Prediction': str(prediction[0])})
 
 if __name__ == '__main__':
