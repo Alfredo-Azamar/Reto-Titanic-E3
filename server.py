@@ -1,21 +1,23 @@
 # Python Libraries
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
 import joblib
 from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
 
 # File management
 import os
 from werkzeug.utils import secure_filename
 
+# Server configuration
 server = Flask(__name__)
 CORS(server)
 
 # Loading the model
-dt = joblib.load('dt1_V5.joblib')
-scaler = joblib.load('dt1_scaler_V5.joblib')
+dt = joblib.load('dt1_V6.joblib')
+scaler = joblib.load('dt1_scaler_V6.joblib')
+
 
 # Defining a route to send JSON data
 @server.route('/predict', methods=['POST'])
