@@ -14,8 +14,8 @@ server = Flask(__name__)
 CORS(server)
 
 # Loading the model
-dt = joblib.load('dt1_scaler_V5.joblib')
-scaler = joblib.load('dt1_V5.joblib')
+dt = joblib.load('dt1_V5.joblib')
+scaler = joblib.load('dt1_scaler_V5.joblib')
 
 # Defining a route to send JSON data
 @server.route('/predict', methods=['POST'])
