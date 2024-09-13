@@ -9,6 +9,7 @@ import d2 from "../assets/d2.png";
 import d3 from "../assets/d3.png";
 import mars from "../assets/mars.png";
 import earth from "../assets/earth.png";
+import Modal from "./Modal";
 
 const homePlanets = [
   { name: "Earth", color: "#50D4F2", imgs: earth },
@@ -23,47 +24,73 @@ const destinationPlanets = [
 const Quoter = (props) => {
   const navigate = useNavigate();
 
+  const [acceptance, setAcceptance] = useState(false);
   const [age, setAge] = useState("");
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
   const [budget, setBudget] = useState(50);
   const [isVIP, setIsVIP] = useState(false);
+  const [isCryoSleep, setIsCryoSleep] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [divBudget, setDivBudget] = useState(0);
 
   const handleQuoteForAPI = async (event) => {
-    try{
-        console.log('Sending info')
-        const response = await fetch('http://52.45.99.191:8080/predict', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                RoomService: 5,
-                FoodCourt: 5,
-                ShoppingMall: 5,
-                Spa: 5,
-                VRDeck: 5,
-                Age: age,
-                VIP_True: 1.0,
-                CryoSleep_True: 0.0,
-                HomePlanet_Mars: 1.0,
-                'Destination_PSO J318.5-22': 0.0,
-                'Destination_TRAPPIST-1e': 1.0
-            })
-        });
-        if(!response.ok){
-            throw new Error('Failed to fetch');
-        }
-        console.log(response.json());
+    try {
+      console.log("Sending info");
+      const response = await fetch("http://52.45.99.191:8080/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          RoomService: isCryoSleep ? 0 : divBudget,
+          FoodCourt: isCryoSleep ? 0 : divBudget,
+          ShoppingMall: isCryoSleep ? 0 : divBudget,
+          Spa: isCryoSleep ? 0 : divBudget,
+          VRDeck: isCryoSleep ? 0 : divBudget,
+          Age: age,
+          VIP_True: isVIP ? 1.0 : 0.0,
+          CryoSleep_True: isCryoSleep ? 1.0 : 0.0,
+          HomePlanet_Mars: origin === 1 ? 1.0 : 0.0,
+          "Destination_PSO J318.5-22": destination === 2 ? 1.0 : 0.0,
+          "Destination_TRAPPIST-1e": destination === 0 ? 1.0 : 0.0,
+        }),
+      });
+
+      const requestBody = {
+        RoomService: isCryoSleep ? 0 : divBudget,
+        FoodCourt: isCryoSleep ? 0 : divBudget,
+        ShoppingMall: isCryoSleep ? 0 : divBudget,
+        Spa: isCryoSleep ? 0 : divBudget,
+        VRDeck: isCryoSleep ? 0 : divBudget,
+        Age: age,
+        VIP_True: isVIP ? 1.0 : 0.0,
+        CryoSleep_True: isCryoSleep ? 1.0 : 0.0,
+        HomePlanet_Mars: origin === 1 ? 1.0 : 0.0,
+        "Destination_PSO J318.5-22": destination === 2 ? 1.0 : 0.0,
+        "Destination_TRAPPIST-1e": destination === 0 ? 1.0 : 0.0,
+      };
+      console.log("Request Body:", requestBody);
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+        console.log(result.Prediction);
+        setAcceptance(result.Prediction);
+        setIsModalOpen(true);
+      } else {
+        console.error("Error en la respuesta:", response.statusText);
+      }
+    } catch (err) {
+      console.log("Founded error: ", err);
     }
-    catch(err){
-        console.log('Founded error: ',err);
-    }
-  }
+  };
 
   const handlePlanetClick = (type, planetIndex) => {
     if (type === "origin") setOrigin(planetIndex);
     if (type === "destination") setDestination(planetIndex);
+    console.log("Planet origin: " + origin);
+    console.log("Planet destination: " + destination);
   };
 
   const handleArrowClick = () => {
@@ -72,12 +99,13 @@ const Quoter = (props) => {
 
   const handleVIPChange = () => setIsVIP(!isVIP);
 
-  const handleQuote = () => {
-    alert(
-      `Age: ${age}\nOrigin: Planet ${origin + 1}\nDestination: Planet ${
-        destination + 1
-      }\nBudget: ${budget}\nVIP: ${isVIP}`
-    );
+  const handleCryoSleepChange = () => {
+    setIsCryoSleep(!isCryoSleep);
+    if (!isCryoSleep) setBudget(0);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -88,7 +116,7 @@ const Quoter = (props) => {
         className="quoter-background"
       />
       <div className="quoter-header" onClick={handleArrowClick}>
-        <FaArrowLeftLong class="arrow" />
+        <FaArrowLeftLong className="arrow" />
       </div>
       <div>
         <p className="quoter-title">Stellar Exodus Quoter</p>
@@ -110,13 +138,15 @@ const Quoter = (props) => {
           <h3>Origin</h3>
           <div className="planet-options">
             {homePlanets.map((planet, index) => (
-              <img
-                src={planet.imgs}
-                alt={planet.name}
-                key={index}
-                className={`planet ${origin === index ? "selected" : ""}`}
-                onClick={() => handlePlanetClick("origin", index)}
-              />
+              <div key={index} className="planet-container">
+                <img
+                  src={planet.imgs}
+                  alt={planet.name}
+                  className={`planet ${origin === index ? "selected" : ""}`}
+                  onClick={() => handlePlanetClick("origin", index)}
+                />
+                <div className="planet-name">{planet.name}</div>{" "}
+              </div>
             ))}
           </div>
         </div>
@@ -125,16 +155,31 @@ const Quoter = (props) => {
           <h3>Destination</h3>
           <div className="planet-options">
             {destinationPlanets.map((planet, index) => (
-              <img
-                src={planet.imgs}
-                alt={planet.name}
-                key={index}
-                className={`planet ${destination === index ? "selected" : ""}`}
-                onClick={() => handlePlanetClick("destination", index)}
-              />
+              <div key={index} className="planet-container">
+                <img
+                  src={planet.imgs}
+                  alt={planet.name}
+                  className={`planet ${
+                    destination === index ? "selected" : ""
+                  }`}
+                  onClick={() => handlePlanetClick("destination", index)}
+                />
+                <div className="planet-name">{planet.name}</div>{" "}
+              </div>
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="cryo-section">
+        <label>
+          <input
+            type="checkbox"
+            checked={isCryoSleep}
+            onChange={handleCryoSleepChange}
+          />{" "}
+          Are you gonna travel in Cryo Sleep?
+        </label>
       </div>
 
       <div className="budget-section">
@@ -142,12 +187,15 @@ const Quoter = (props) => {
         <input
           type="range"
           min="0"
-          max="100"
-          value={budget}
-          onChange={(e) => setBudget(e.target.value)}
+          max="6000"
+          value={isCryoSleep ? 0 : budget}
+          onChange={(e) =>
+            setBudget(e.target.value) & setDivBudget(e.target.value / 5)
+          }
           className="budget-slider"
+          disabled={isCryoSleep}
         />
-        <div>Budget: {budget}</div>
+        <div>Budget: ${isCryoSleep ? 0 : budget}</div>
       </div>
 
       <div className="vip-section">
@@ -160,6 +208,10 @@ const Quoter = (props) => {
       <button onClick={handleQuoteForAPI} className="quote-button">
         Quote
       </button>
+
+      {isModalOpen && (
+        <Modal acceptance={acceptance} onClose={handleCloseModal} destin={destination}/>
+      )}
     </div>
   );
 };

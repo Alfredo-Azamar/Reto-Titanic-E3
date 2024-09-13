@@ -18,7 +18,7 @@
 .arrow{
   font-size: 24px;
   font-weight: bold;
-  margin-top: 50px;
+  margin-top: 10px;
   color: aliceblue;
 }
 
@@ -40,9 +40,17 @@
   cursor: pointer;
 }
 
+.planet-name{
+  font-size: 10px;
+  font-weight: bold;
+  margin: 0;
+  color: aliceblue;
+  margin-bottom: 20px;
+}
+
 .form-section label {
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   display: block;
   margin-top: 20px;
   color: aliceblue;
@@ -55,7 +63,7 @@
   border: 2px solid #AC4FC6;
   background-color: transparent;
   color: aliceblue;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .planet-section {
@@ -63,6 +71,7 @@
   justify-content: center;
   margin-bottom: 10px;
   color: aliceblue;
+  margin-top: 0;
 }
 
 .origin-section{
@@ -102,6 +111,11 @@
 }
 
 .vip-section {
+  margin-bottom: 20px;
+  color: aliceblue;
+}
+
+.cryo-section {
   margin-bottom: 20px;
   color: aliceblue;
 }
