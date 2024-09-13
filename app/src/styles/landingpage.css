@@ -1,0 +1,134 @@
+.landing-page {
+  font-family: "Century Gothic", "Futura";
+  padding: 0;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.landing-header {
+  margin-top: 50px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 80px;
+}
+
+.background-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/imageLoaded.png");
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.landing-content.blurred .background-overlay {
+  opacity: 1;
+}
+
+.blurred{
+  opacity: 1;
+}
+
+.landing-content {
+  position: absolute;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  opacity: 0;
+  transition: opacity 1s ease;
+  color: aliceblue;
+}
+
+.landing-content.visible{
+  opacity: 1;
+}
+
+.menu-icon {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.landing-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0 50px; 
+  flex-grow: 1;
+}
+
+.landing-text {
+  margin: 0;
+  text-align: left;
+}
+
+.landing-text h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.landing-text h2 {
+  font-size: 24px;
+  font-weight: 300;
+  margin: 0;
+}
+
+.landing-text h2 span {
+  font-weight: 400;
+}
+
+.landing-text .highlight {
+  color: #ff007f;
+}
+
+.landing-subtext {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.fill-form-button {
+  background-color: #ff007f;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 15px 40px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.colorscircle {
+  width: 500px;
+  opacity: 0;
+}
+
+.button-container{
+  justify-content: left;
+  text-align: left;
+}
