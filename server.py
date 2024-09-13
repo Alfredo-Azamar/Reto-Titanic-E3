@@ -1,6 +1,7 @@
 # Python Libraries
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import numpy as np
 import joblib
 from sklearn.preprocessing import MinMaxScaler
@@ -8,6 +9,9 @@ from sklearn.preprocessing import MinMaxScaler
 # File management
 import os
 from werkzeug.utils import secure_filename
+
+server = Flask(__name__)
+CORS(server)
 
 # Loading the model
 dt = joblib.load('dt1.joblib')
